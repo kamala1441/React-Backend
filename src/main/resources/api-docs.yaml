@@ -1,0 +1,931 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "BProject REST API for local",
+    "description": "B Project",
+    "termsOfService": "Terms of service",
+    "contact": {
+      "name": "Rejola",
+      "url": "www.rejola.com",
+      "email": "kamalaroy95@gmail.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Inferred Url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "User Authentication"
+    },
+    {
+      "name": "client-controller",
+      "description": "Client Controller"
+    },
+    {
+      "name": "department-controller",
+      "description": "Department Controller"
+    },
+    {
+      "name": "master-controller",
+      "description": "Master Controller"
+    },
+    {
+      "name": "user-controller",
+      "description": "User Controller"
+    }
+  ],
+  "paths": {
+    "/v1/auth/forgot": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "forgotPassword",
+        "operationId": "forgotPasswordUsingGET",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Employee email id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login user",
+        "description": "User authentication",
+        "operationId": "loginUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/auth/password/reset": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Reset password",
+        "description": "Reset password",
+        "operationId": "resetPasswordUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResetPasswordRequest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "UnAuthorized"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/auth/refresh": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "refresh",
+        "operationId": "refreshUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/client": {
+      "get": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "getAllClients",
+        "operationId": "getAllClientsUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "saveClient",
+        "operationId": "saveClientUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/client/contact": {
+      "post": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "saveContact",
+        "operationId": "saveContactUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/client/contact/{id}": {
+      "delete": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "deleteContact",
+        "operationId": "deleteContactUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/client/{clientId}": {
+      "get": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "getContactByClientId",
+        "operationId": "getContactByClientIdUsingGET",
+        "parameters": [
+          {
+            "name": "clientId",
+            "in": "path",
+            "description": "clientId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/client/{id}": {
+      "delete": {
+        "tags": [
+          "client-controller"
+        ],
+        "summary": "deleteClient",
+        "operationId": "deleteClientUsingDELETE",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/department": {
+      "get": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "getAll",
+        "operationId": "getAllUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "department-controller"
+        ],
+        "summary": "create",
+        "operationId": "createUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepartmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/getActivityList": {
+      "get": {
+        "tags": [
+          "master-controller"
+        ],
+        "summary": "getActivityList",
+        "operationId": "getActivityListUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/user": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "getUser",
+        "operationId": "getUserUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "createUser",
+        "operationId": "createUserUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/user/budgetGroup": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "getAllBudgetGroup",
+        "operationId": "getAllBudgetGroupUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/master/user/designation": {
+      "get": {
+        "tags": [
+          "user-controller"
+        ],
+        "summary": "getAllDesignation",
+        "operationId": "getAllDesignationUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonNode"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BranchDto": {
+        "title": "BranchDto",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "BudgetGroupDto": {
+        "title": "BudgetGroupDto",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ClientRequest": {
+        "title": "ClientRequest",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactRequest": {
+        "title": "ContactRequest",
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "contactDesignation": {
+            "type": "string"
+          },
+          "contactEmail": {
+            "type": "string"
+          },
+          "contactName": {
+            "type": "string"
+          },
+          "contactPhoneNo": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "DepartmentDto": {
+        "title": "DepartmentDto",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "DepartmentRequest": {
+        "title": "DepartmentRequest",
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "DesignationDTO": {
+        "title": "DesignationDTO",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonNode": {
+        "title": "JsonNode",
+        "type": "object"
+      },
+      "LoginRequest": {
+        "title": "LoginRequest",
+        "required": [
+          "empId",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "empId": {
+            "type": "object",
+            "description": "Employee Id",
+            "example": "EMP001"
+          },
+          "password": {
+            "type": "object",
+            "description": "Employee password",
+            "example": "changeme"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "title": "ResetPasswordRequest",
+        "required": [
+          "password",
+          "t"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "object",
+            "description": "New password",
+            "example": "changme"
+          },
+          "t": {
+            "type": "string",
+            "description": "Token"
+          }
+        }
+      },
+      "SubUserDto": {
+        "title": "SubUserDto",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "empId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UserDto": {
+        "title": "UserDto",
+        "type": "object",
+        "properties": {
+          "branch": {
+            "$ref": "#/components/schemas/BranchDto"
+          },
+          "budgetGroup": {
+            "$ref": "#/components/schemas/BudgetGroupDto"
+          },
+          "ctc": {
+            "type": "string"
+          },
+          "department": {
+            "$ref": "#/components/schemas/DepartmentDto"
+          },
+          "designation": {
+            "$ref": "#/components/schemas/DesignationDTO"
+          },
+          "email": {
+            "type": "string"
+          },
+          "empId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "projectManager": {
+            "$ref": "#/components/schemas/SubUserDto"
+          },
+          "projectManagerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "teamLead": {
+            "$ref": "#/components/schemas/SubUserDto"
+          },
+          "teamLeadId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeSheetApprover": {
+            "$ref": "#/components/schemas/SubUserDto"
+          },
+          "timeSheetApproverId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "UserRequest": {
+        "title": "UserRequest",
+        "type": "object",
+        "properties": {
+          "branchId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "budgetGroupId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ctc": {
+            "type": "string"
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "designationId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "email": {
+            "type": "string"
+          },
+          "empId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "projectManagerId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "teamLeadId": {
+            "type": "string"
+          },
+          "timeSheetApproverId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
