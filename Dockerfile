@@ -6,11 +6,11 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 RUN ./mvnw package -Dmaven.test.skip=true
-COPY target/*.jar ems.jar
+COPY target/*.jar BProject.jar
 
 FROM openjdk:11
-COPY --from=buildstage /app/ems.jar .
+COPY --from=buildstage /app/BProject.jar .
 EXPOSE 6530
-ENTRYPOINT ["java", "-jar", "/ems.jar"]
+ENTRYPOINT ["java", "-jar", "/BProject.jar"]
 
 
